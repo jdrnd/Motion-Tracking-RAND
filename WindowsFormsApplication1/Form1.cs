@@ -14,8 +14,11 @@ using System.Diagnostics;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
+
 namespace WindowsFormsApplication1
 {
+
+
     public partial class Form1 : Form
     {
         List<Bitmap> frames = new List<Bitmap>();
@@ -27,6 +30,11 @@ namespace WindowsFormsApplication1
 
         //Create webcam object
         VideoCaptureDevice videoSource;
+
+        //Declares blank RGB colors
+        public static Color red = Color.FromArgb(0,0,0);
+        public static Color green = Color.FromArgb(0,0,0);
+        public static Color blue = Color.FromArgb(0,0,0);
 
         private void start_Click(object sender, EventArgs e)
         {
@@ -80,51 +88,64 @@ namespace WindowsFormsApplication1
             foreach (Bitmap bitmap in frames)
             {   
                 //Color viewer
-                int x = int.Parse(xcoordinate.Text);
-                int y = int.Parse(ycoordinate.Text);
-                colordata.Items.Add(bitmap.GetPixel(x, y));
+                //if (xcoordinate.Text != null && ycoordinate.Text != null)
+                //{
+                //    int x = int.Parse(xcoordinate.Text);
+                //    int y = int.Parse(ycoordinate.Text);
+                //    colordata.Items.Add(bitmap.GetPixel(x, y));
+                //}
 
                 //Sets imagebox bg to image from bitmap array
                 stream.BackgroundImage = bitmap;
                 Application.DoEvents();
 
                 //Code to draw rectangle around selected pixel for color viewer
-                Pen pen = new Pen(Color.White, 2);
-                Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
-                bgimage.DrawRectangle(pen, x, y, 7, 7);
+                //Pen pen = new Pen(Color.White, 2);
+                //Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
+                //bgimage.DrawRectangle(pen, x, y, 7, 7);
 
                 
                 //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each r, g or b pixel a marking space in an array
                 int[,] data = new int[320, 240];
 
-                for (int i = 0; i < 320; i++)
-                {
-                    for (int j = 0; j < 240; j++)
+
+                //Makes sure colors have been calibrated
+                if (red == Color.FromArgb(0, 0, 0) && green == Color.FromArgb(0, 0, 0) && blue == Color.FromArgb(0, 0, 0))
+                        {
+                            colordata.Items.Add("Please calibrate the colors");
+                            break;
+                        }
+                else {
+                    for (int i = 0; i < 320; i++)
                     {
-                        Color PixelColor = bitmap.GetPixel(i, j);
+                        for (int j = 0; j < 240; j++)
+                        {   
 
-                        //1 is added to color value to prevent dividing by 0
+                            Color PixelColor = bitmap.GetPixel(i, j);
 
-                        if (PixelColor.R > 100 && (PixelColor.R + 1) / (PixelColor.G + 1) > 2 && (PixelColor.R + 1) / (PixelColor.B + 1) > 2)
-                        {
-                            data[i, j] = 1;
-                        }
-                        else if (PixelColor.G > 100 && (PixelColor.G + 1) / (PixelColor.R + 1) > 2 && (PixelColor.G + 1) / (PixelColor.B + 1) > 2)
-                        {
-                            data[i, j] = 2;
-                        }
-                        else if (PixelColor.B > 100 && (PixelColor.B + 1) / (PixelColor.R + 1) > 2 && (PixelColor.B) / (PixelColor.G + 1) > 2)
-                        {
-                            data[i, j] = 3;
-                        }
-                        else
-                        {
-                            data[i, j] = 0;
+                            //1 is added to color value to prevent dividing by 0
 
+                            if (PixelColor.R > 100 && (PixelColor.R + 1) / (PixelColor.G + 1) > 2 && (PixelColor.R + 1) / (PixelColor.B + 1) > 2)
+                            {
+                                data[i, j] = 1;
+                            }
+                            else if (PixelColor.G > 100 && (PixelColor.G + 1) / (PixelColor.R + 1) > 2 && (PixelColor.G + 1) / (PixelColor.B + 1) > 2)
+                            {
+                                data[i, j] = 2;
+                            }
+                            else if (PixelColor.B > 100 && (PixelColor.B + 1) / (PixelColor.R + 1) > 2 && (PixelColor.B) / (PixelColor.G + 1) > 2)
+                            {
+                                data[i, j] = 3;
+                            }
+                            else
+                            {
+                                data[i, j] = 0;
+
+                            }
                         }
 
+                    //stream.BackgroundImage = bitmap;
                     }
-                    stream.BackgroundImage = bitmap;
                 }
             }
         }
@@ -159,9 +180,34 @@ namespace WindowsFormsApplication1
 
         private void stream_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap = (Bitmap)stream.BackgroundImage; 
-            Color selectedpixel = bitmap.GetPixel(MousePosition.X, MousePosition.Y);
+            Bitmap bitmap = (Bitmap)stream.BackgroundImage;
+            MouseEventArgs me = (MouseEventArgs)e;
+            Color selectedpixel = bitmap.GetPixel(me.X, me.Y);
             colordata.Items.Add(selectedpixel);
+            colordisplay.BackColor = selectedpixel;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            red = colordisplay.BackColor;
+            colorviewred.BackColor = red;
+        }
+
+        private void calibrateblue_Click(object sender, EventArgs e)
+        {
+            blue = colordisplay.BackColor;
+            colorviewblue.BackColor = blue;
+        }
+
+        private void calibrategreen_Click(object sender, EventArgs e)
+        {
+            green = colordisplay.BackColor;
+            colorviewgreen.BackColor = green;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
  
         

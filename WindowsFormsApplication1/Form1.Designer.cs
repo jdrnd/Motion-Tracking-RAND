@@ -34,10 +34,14 @@
             this.analyse = new System.Windows.Forms.Button();
             this.colordata = new System.Windows.Forms.ListBox();
             this.pixelpickerlabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.xcoordinate = new System.Windows.Forms.TextBox();
-            this.ycoordinate = new System.Windows.Forms.TextBox();
+            this.calibratered = new System.Windows.Forms.Button();
+            this.calibrateblue = new System.Windows.Forms.Button();
+            this.calibrategreen = new System.Windows.Forms.Button();
+            this.colorlabel = new System.Windows.Forms.Label();
+            this.colordisplay = new System.Windows.Forms.Panel();
+            this.colorviewred = new System.Windows.Forms.Panel();
+            this.colorviewgreen = new System.Windows.Forms.Panel();
+            this.colorviewblue = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.stream)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,52 +98,91 @@
             this.pixelpickerlabel.AutoSize = true;
             this.pixelpickerlabel.Location = new System.Drawing.Point(620, 13);
             this.pixelpickerlabel.Name = "pixelpickerlabel";
-            this.pixelpickerlabel.Size = new System.Drawing.Size(135, 13);
+            this.pixelpickerlabel.Size = new System.Drawing.Size(132, 13);
             this.pixelpickerlabel.TabIndex = 5;
-            this.pixelpickerlabel.Text = "Enter coordinates of a pixel";
+            this.pixelpickerlabel.Text = "Click a pixel to get its color";
             this.pixelpickerlabel.Click += new System.EventHandler(this.pixelpickerlabel_Click);
             // 
-            // label1
+            // calibratered
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(623, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(12, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "x";
+            this.calibratered.Location = new System.Drawing.Point(366, 274);
+            this.calibratered.Name = "calibratered";
+            this.calibratered.Size = new System.Drawing.Size(94, 23);
+            this.calibratered.TabIndex = 6;
+            this.calibratered.Text = "Calibrate Red";
+            this.calibratered.UseVisualStyleBackColor = true;
+            this.calibratered.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // label2
+            // calibrateblue
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(623, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(12, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "y";
+            this.calibrateblue.Location = new System.Drawing.Point(603, 274);
+            this.calibrateblue.Name = "calibrateblue";
+            this.calibrateblue.Size = new System.Drawing.Size(88, 23);
+            this.calibrateblue.TabIndex = 7;
+            this.calibrateblue.Text = "Calibrate Blue";
+            this.calibrateblue.UseVisualStyleBackColor = true;
+            this.calibrateblue.Click += new System.EventHandler(this.calibrateblue_Click);
             // 
-            // xcoordinate
+            // calibrategreen
             // 
-            this.xcoordinate.Location = new System.Drawing.Point(651, 30);
-            this.xcoordinate.Name = "xcoordinate";
-            this.xcoordinate.Size = new System.Drawing.Size(100, 20);
-            this.xcoordinate.TabIndex = 8;
+            this.calibrategreen.Location = new System.Drawing.Point(484, 274);
+            this.calibrategreen.Name = "calibrategreen";
+            this.calibrategreen.Size = new System.Drawing.Size(96, 23);
+            this.calibrategreen.TabIndex = 8;
+            this.calibrategreen.Text = "Calibrate Green";
+            this.calibrategreen.UseVisualStyleBackColor = true;
+            this.calibrategreen.Click += new System.EventHandler(this.calibrategreen_Click);
             // 
-            // ycoordinate
+            // colorlabel
             // 
-            this.ycoordinate.Location = new System.Drawing.Point(651, 57);
-            this.ycoordinate.Name = "ycoordinate";
-            this.ycoordinate.Size = new System.Drawing.Size(100, 20);
-            this.ycoordinate.TabIndex = 9;
+            this.colorlabel.AutoSize = true;
+            this.colorlabel.Location = new System.Drawing.Point(623, 45);
+            this.colorlabel.Name = "colorlabel";
+            this.colorlabel.Size = new System.Drawing.Size(68, 13);
+            this.colorlabel.TabIndex = 9;
+            this.colorlabel.Text = "Current Color";
+            // 
+            // colordisplay
+            // 
+            this.colordisplay.Location = new System.Drawing.Point(626, 74);
+            this.colordisplay.Name = "colordisplay";
+            this.colordisplay.Size = new System.Drawing.Size(56, 38);
+            this.colordisplay.TabIndex = 10;
+            // 
+            // colorviewred
+            // 
+            this.colorviewred.Location = new System.Drawing.Point(366, 303);
+            this.colorviewred.Name = "colorviewred";
+            this.colorviewred.Size = new System.Drawing.Size(18, 15);
+            this.colorviewred.TabIndex = 11;
+            // 
+            // colorviewgreen
+            // 
+            this.colorviewgreen.Location = new System.Drawing.Point(484, 303);
+            this.colorviewgreen.Name = "colorviewgreen";
+            this.colorviewgreen.Size = new System.Drawing.Size(16, 14);
+            this.colorviewgreen.TabIndex = 12;
+            // 
+            // colorviewblue
+            // 
+            this.colorviewblue.Location = new System.Drawing.Point(603, 304);
+            this.colorviewblue.Name = "colorviewblue";
+            this.colorviewblue.Size = new System.Drawing.Size(20, 14);
+            this.colorviewblue.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 330);
-            this.Controls.Add(this.ycoordinate);
-            this.Controls.Add(this.xcoordinate);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.colorviewblue);
+            this.Controls.Add(this.colorviewgreen);
+            this.Controls.Add(this.colorviewred);
+            this.Controls.Add(this.colordisplay);
+            this.Controls.Add(this.colorlabel);
+            this.Controls.Add(this.calibrategreen);
+            this.Controls.Add(this.calibrateblue);
+            this.Controls.Add(this.calibratered);
             this.Controls.Add(this.pixelpickerlabel);
             this.Controls.Add(this.colordata);
             this.Controls.Add(this.analyse);
@@ -148,6 +191,7 @@
             this.Controls.Add(this.stream);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.stream)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -162,10 +206,14 @@
         private System.Windows.Forms.Button analyse;
         private System.Windows.Forms.ListBox colordata;
         private System.Windows.Forms.Label pixelpickerlabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox xcoordinate;
-        private System.Windows.Forms.TextBox ycoordinate;
+        private System.Windows.Forms.Button calibratered;
+        private System.Windows.Forms.Button calibrateblue;
+        private System.Windows.Forms.Button calibrategreen;
+        private System.Windows.Forms.Label colorlabel;
+        private System.Windows.Forms.Panel colordisplay;
+        private System.Windows.Forms.Panel colorviewred;
+        private System.Windows.Forms.Panel colorviewgreen;
+        private System.Windows.Forms.Panel colorviewblue;
     }
 }
 
