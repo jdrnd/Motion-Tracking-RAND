@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics; 
 
 //Imports AForge libraries
 using AForge.Video;
 using AForge.Video.DirectShow;
-using System.Diagnostics;
+
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
@@ -67,71 +68,100 @@ namespace WindowsFormsApplication1
 
         private void stop_Click(object sender, EventArgs e)
         {
-            videoSource.SignalToStop();
-            videoSource = null;
+         videoSource.SignalToStop();
+         videoSource = null;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             stream.BackgroundImage = null;
+            colordata.Items.Clear();
 
             foreach (Bitmap bitmap in frames)
-            {
-                stream.BackgroundImage = bitmap;
+            {   
+                //Color viewer
+                int x = int.Parse(xcoordinate.Text);
+                int y = int.Parse(ycoordinate.Text);
+                colordata.Items.Add(bitmap.GetPixel(x, y));
 
+                //Sets imagebox bg to image from bitmap array
+                stream.BackgroundImage = bitmap;
                 Application.DoEvents();
 
-                //Goes through image as a pixel array and assigns number values to rgb colors
+                //Code to draw rectangle around selected pixel for color viewer
+                Pen pen = new Pen(Color.White, 2);
+                Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
+                bgimage.DrawRectangle(pen, x, y, 7, 7);
 
+                
+                //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each r, g or b pixel a marking space in an array
                 int[,] data = new int[320, 240];
 
                 for (int i = 0; i < 320; i++)
                 {
                     for (int j = 0; j < 240; j++)
                     {
-                        Color Color = bitmap.GetPixel( i, j);
-                        if (Color.R > 0.5f && Color.R < 1f)
+                        Color PixelColor = bitmap.GetPixel(i, j);
+
+                        //1 is added to color value to prevent dividing by 0
+
+                        if (PixelColor.R > 100 && (PixelColor.R + 1) / (PixelColor.G + 1) > 2 && (PixelColor.R + 1) / (PixelColor.B + 1) > 2)
                         {
-                            data[i, i] = 1;
+                            data[i, j] = 1;
                         }
-                        else if (Color.G > 0.5f && Color.G < 1f)
+                        else if (PixelColor.G > 100 && (PixelColor.G + 1) / (PixelColor.R + 1) > 2 && (PixelColor.G + 1) / (PixelColor.B + 1) > 2)
                         {
                             data[i, j] = 2;
                         }
-                        else if (Color.B > 0.5f && Color.B < 1f)
+                        else if (PixelColor.B > 100 && (PixelColor.B + 1) / (PixelColor.R + 1) > 2 && (PixelColor.B) / (PixelColor.G + 1) > 2)
                         {
                             data[i, j] = 3;
-                            Console.Write("Blue");
                         }
                         else
                         {
                             data[i, j] = 0;
-                            
+
                         }
 
                     }
-                }
-
-                //Passes colored pixels to array display box
-
-                for (int i = 0; i < 320; i++)
-                {
-
-                    for (int j = 0; j < 240; j++)
-                    {
-
-                        if (data[i, j] > 0)
-                        {
-                            colordata.Items.Add(data[i, j].ToString());
-                        }
-                    }
-
+                    stream.BackgroundImage = bitmap;
                 }
             }
         }
+
+            // Passes colored pixels to debug console
+
+            //    for (int i = 0; i < 320; i++)
+            ////    {
+
+            ////        for (int j = 0; j < 240; j++)
+            ////        {
+
+            ////            if (data[i, j] > 0)
+            ////            {
+            ////                Debug.Write(data[i, j] + ",");
+            ////            }
+            ////        }
+
+            ////    }
+            ////}
+
+
         private void colordata_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pixelpickerlabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stream_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap = (Bitmap)stream.BackgroundImage; 
+            Color selectedpixel = bitmap.GetPixel(MousePosition.X, MousePosition.Y);
+            colordata.Items.Add(selectedpixel);
         }
  
         
