@@ -42,6 +42,8 @@
             this.colorviewred = new System.Windows.Forms.Panel();
             this.colorviewgreen = new System.Windows.Forms.Panel();
             this.colorviewblue = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.visuallytrack = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.stream)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,11 +172,33 @@
             this.colorviewblue.Size = new System.Drawing.Size(20, 14);
             this.colorviewblue.TabIndex = 13;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(626, 135);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Visually Track?";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // visuallytrack
+            // 
+            this.visuallytrack.AutoSize = true;
+            this.visuallytrack.Location = new System.Drawing.Point(710, 135);
+            this.visuallytrack.Name = "visuallytrack";
+            this.visuallytrack.Size = new System.Drawing.Size(14, 13);
+            this.visuallytrack.TabIndex = 15;
+            this.visuallytrack.TabStop = true;
+            this.visuallytrack.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 330);
+            this.Controls.Add(this.visuallytrack);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.colorviewblue);
             this.Controls.Add(this.colorviewgreen);
             this.Controls.Add(this.colorviewred);
@@ -214,6 +238,8 @@
         private System.Windows.Forms.Panel colorviewred;
         private System.Windows.Forms.Panel colorviewgreen;
         private System.Windows.Forms.Panel colorviewblue;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton visuallytrack;
     }
 }
 

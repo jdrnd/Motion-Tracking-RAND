@@ -76,8 +76,11 @@ namespace WindowsFormsApplication1
 
         private void stop_Click(object sender, EventArgs e)
         {
-         videoSource.SignalToStop();
-         videoSource = null;
+            if (videoSource != null)
+            {
+                videoSource.SignalToStop();
+                videoSource = null;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -125,18 +128,28 @@ namespace WindowsFormsApplication1
 
                             //1 is added to color value to prevent dividing by 0
 
-                            if (PixelColor.R > 100 && (PixelColor.R + 1) / (PixelColor.G + 1) > 2 && (PixelColor.R + 1) / (PixelColor.B + 1) > 2)
+                            if (Math.Abs(PixelColor.R - red.R) < 20 && Math.Abs(PixelColor.G - red.B) < 20 && Math.Abs(PixelColor.B - red.B) < 20)
                             {
                                 data[i, j] = 1;
+                                Debug.Write("1");
+                                if (visuallytrack.Checked)
+                                {
+                                    Pen pen = new Pen(Color.White, 2);
+                                    Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
+                                    bgimage.DrawRectangle(pen, i, j, 2, 2);
+                                }
                             }
-                            else if (PixelColor.G > 100 && (PixelColor.G + 1) / (PixelColor.R + 1) > 2 && (PixelColor.G + 1) / (PixelColor.B + 1) > 2)
-                            {
-                                data[i, j] = 2;
-                            }
-                            else if (PixelColor.B > 100 && (PixelColor.B + 1) / (PixelColor.R + 1) > 2 && (PixelColor.B) / (PixelColor.G + 1) > 2)
-                            {
-                                data[i, j] = 3;
-                            }
+                            //else if (Math.Abs(PixelColor.R - green.R) < 20 && Math.Abs(PixelColor.G - green.G) < 20 && Math.Abs(PixelColor.B - green.B) < 20)
+                            //{
+                            //    data[i, j] = 2;
+                            //    Debug.Write("2");
+                            //    ;
+                            //}
+                            //else if (Math.Abs(PixelColor.R - blue.R) < 20 && Math.Abs(PixelColor.G - blue.G) < 20 && Math.Abs(PixelColor.B - blue.B) < 20)
+                            //{
+                            //    data[i, j] = 3;
+                            //    Debug.Write("3");
+                            //}
                             else
                             {
                                 data[i, j] = 0;
@@ -144,7 +157,7 @@ namespace WindowsFormsApplication1
                             }
                         }
 
-                    //stream.BackgroundImage = bitmap;
+                    
                     }
                 }
             }
@@ -206,6 +219,11 @@ namespace WindowsFormsApplication1
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
