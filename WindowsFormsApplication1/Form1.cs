@@ -32,9 +32,7 @@ namespace WindowsFormsApplication1
         VideoCaptureDevice videoSource;
 
         //Declares blank RGB colors
-        public static Color red = Color.FromArgb(0,0,0);
-        public static Color green = Color.FromArgb(0,0,0);
-        public static Color blue = Color.FromArgb(0,0,0);
+        public static Color black = Color.FromArgb(0,0,0);
 
         private void start_Click(object sender, EventArgs e)
         {
@@ -112,13 +110,15 @@ namespace WindowsFormsApplication1
                 int[,] data = new int[320, 240];
 
 
-                //Makes sure colors have been calibrated
-                if (red == Color.FromArgb(0, 0, 0) && green == Color.FromArgb(0, 0, 0) && blue == Color.FromArgb(0, 0, 0))
+                /*Makes sure colors have been calibrated
+                if (backgcolor == Color.FromArgb(0, 0, 0))
                         {
-                            colordata.Items.Add("Please calibrate the colors");
+                            colordata.Items.Add("Please calibrate");
                             break;
                         }
+                 * 
                 else {
+                  */
                     for (int i = 0; i < 320; i++)
                     {
                         for (int j = 0; j < 240; j++)
@@ -128,7 +128,7 @@ namespace WindowsFormsApplication1
 
                             //1 is added to color value to prevent dividing by 0
 
-                            if (Math.Abs(PixelColor.R - red.R) < 20 && Math.Abs(PixelColor.G - red.B) < 20 && Math.Abs(PixelColor.B - red.B) < 20)
+                            if (Math.Abs(PixelColor.R - black.R) < 20 && Math.Abs(PixelColor.G - black.B) < 20 && Math.Abs(PixelColor.B - black.B) < 20)
                             {
                                 data[i, j] = 1;
                                 Debug.Write("1");
@@ -159,7 +159,7 @@ namespace WindowsFormsApplication1
 
                     
                     }
-                }
+                
             }
         }
 
@@ -202,21 +202,10 @@ namespace WindowsFormsApplication1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            red = colordisplay.BackColor;
-            colorviewred.BackColor = red;
+            black = colordisplay.BackColor;
+            colorviewred.BackColor = black;
         }
 
-        private void calibrateblue_Click(object sender, EventArgs e)
-        {
-            blue = colordisplay.BackColor;
-            colorviewblue.BackColor = blue;
-        }
-
-        private void calibrategreen_Click(object sender, EventArgs e)
-        {
-            green = colordisplay.BackColor;
-            colorviewgreen.BackColor = green;
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {

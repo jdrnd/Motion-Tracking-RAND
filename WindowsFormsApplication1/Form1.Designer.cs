@@ -35,13 +35,9 @@
             this.colordata = new System.Windows.Forms.ListBox();
             this.pixelpickerlabel = new System.Windows.Forms.Label();
             this.calibratered = new System.Windows.Forms.Button();
-            this.calibrateblue = new System.Windows.Forms.Button();
-            this.calibrategreen = new System.Windows.Forms.Button();
             this.colorlabel = new System.Windows.Forms.Label();
             this.colordisplay = new System.Windows.Forms.Panel();
             this.colorviewred = new System.Windows.Forms.Panel();
-            this.colorviewgreen = new System.Windows.Forms.Panel();
-            this.colorviewblue = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.visuallytrack = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.stream)).BeginInit();
@@ -111,29 +107,9 @@
             this.calibratered.Name = "calibratered";
             this.calibratered.Size = new System.Drawing.Size(94, 23);
             this.calibratered.TabIndex = 6;
-            this.calibratered.Text = "Calibrate Red";
+            this.calibratered.Text = "Calibrate";
             this.calibratered.UseVisualStyleBackColor = true;
             this.calibratered.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // calibrateblue
-            // 
-            this.calibrateblue.Location = new System.Drawing.Point(603, 274);
-            this.calibrateblue.Name = "calibrateblue";
-            this.calibrateblue.Size = new System.Drawing.Size(88, 23);
-            this.calibrateblue.TabIndex = 7;
-            this.calibrateblue.Text = "Calibrate Blue";
-            this.calibrateblue.UseVisualStyleBackColor = true;
-            this.calibrateblue.Click += new System.EventHandler(this.calibrateblue_Click);
-            // 
-            // calibrategreen
-            // 
-            this.calibrategreen.Location = new System.Drawing.Point(484, 274);
-            this.calibrategreen.Name = "calibrategreen";
-            this.calibrategreen.Size = new System.Drawing.Size(96, 23);
-            this.calibrategreen.TabIndex = 8;
-            this.calibrategreen.Text = "Calibrate Green";
-            this.calibrategreen.UseVisualStyleBackColor = true;
-            this.calibrategreen.Click += new System.EventHandler(this.calibrategreen_Click);
             // 
             // colorlabel
             // 
@@ -157,20 +133,6 @@
             this.colorviewred.Name = "colorviewred";
             this.colorviewred.Size = new System.Drawing.Size(18, 15);
             this.colorviewred.TabIndex = 11;
-            // 
-            // colorviewgreen
-            // 
-            this.colorviewgreen.Location = new System.Drawing.Point(484, 303);
-            this.colorviewgreen.Name = "colorviewgreen";
-            this.colorviewgreen.Size = new System.Drawing.Size(16, 14);
-            this.colorviewgreen.TabIndex = 12;
-            // 
-            // colorviewblue
-            // 
-            this.colorviewblue.Location = new System.Drawing.Point(603, 304);
-            this.colorviewblue.Name = "colorviewblue";
-            this.colorviewblue.Size = new System.Drawing.Size(20, 14);
-            this.colorviewblue.TabIndex = 13;
             // 
             // label1
             // 
@@ -199,13 +161,9 @@
             this.ClientSize = new System.Drawing.Size(767, 330);
             this.Controls.Add(this.visuallytrack);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.colorviewblue);
-            this.Controls.Add(this.colorviewgreen);
             this.Controls.Add(this.colorviewred);
             this.Controls.Add(this.colordisplay);
             this.Controls.Add(this.colorlabel);
-            this.Controls.Add(this.calibrategreen);
-            this.Controls.Add(this.calibrateblue);
             this.Controls.Add(this.calibratered);
             this.Controls.Add(this.pixelpickerlabel);
             this.Controls.Add(this.colordata);
@@ -231,13 +189,9 @@
         private System.Windows.Forms.ListBox colordata;
         private System.Windows.Forms.Label pixelpickerlabel;
         private System.Windows.Forms.Button calibratered;
-        private System.Windows.Forms.Button calibrateblue;
-        private System.Windows.Forms.Button calibrategreen;
         private System.Windows.Forms.Label colorlabel;
         private System.Windows.Forms.Panel colordisplay;
         private System.Windows.Forms.Panel colorviewred;
-        private System.Windows.Forms.Panel colorviewgreen;
-        private System.Windows.Forms.Panel colorviewblue;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton visuallytrack;
     }
