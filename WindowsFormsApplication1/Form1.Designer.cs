@@ -153,6 +153,7 @@
             this.visuallytrack.TabIndex = 15;
             this.visuallytrack.TabStop = true;
             this.visuallytrack.UseVisualStyleBackColor = true;
+            this.visuallytrack.CheckedChanged += new System.EventHandler(this.visuallytrack_CheckedChanged);
             // 
             // Form1
             // 

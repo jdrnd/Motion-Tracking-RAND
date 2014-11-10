@@ -86,39 +86,25 @@ namespace WindowsFormsApplication1
             stream.BackgroundImage = null;
             colordata.Items.Clear();
 
+            int centerx;
+            int centery;
+
+            List<Point> centerpts = new List<Point>();
+            Point center = new Point(160, 120);
+
+
             foreach (Bitmap bitmap in frames)
             {   
-                //Color viewer
-                //if (xcoordinate.Text != null && ycoordinate.Text != null)
-                //{
-                //    int x = int.Parse(xcoordinate.Text);
-                //    int y = int.Parse(ycoordinate.Text);
-                //    colordata.Items.Add(bitmap.GetPixel(x, y));
-                //}
 
                 //Sets imagebox bg to image from bitmap array
                 stream.BackgroundImage = bitmap;
                 Application.DoEvents();
 
-                //Code to draw rectangle around selected pixel for color viewer
-                //Pen pen = new Pen(Color.White, 2);
-                //Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
-                //bgimage.DrawRectangle(pen, x, y, 7, 7);
+                List<Point> colorpts = new List<Point>();
 
-                
-                //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each r, g or b pixel a marking space in an array
+                //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each black pixel a marking space in an array
                 int[,] data = new int[320, 240];
 
-
-                /*Makes sure colors have been calibrated
-                if (backgcolor == Color.FromArgb(0, 0, 0))
-                        {
-                            colordata.Items.Add("Please calibrate");
-                            break;
-                        }
-                 * 
-                else {
-                  */
                     for (int i = 0; i < 320; i++)
                     {
                         for (int j = 0; j < 240; j++)
@@ -126,59 +112,64 @@ namespace WindowsFormsApplication1
 
                             Color PixelColor = bitmap.GetPixel(i, j);
 
-                            //1 is added to color value to prevent dividing by 0
-
                             if (Math.Abs(PixelColor.R - black.R) < 20 && Math.Abs(PixelColor.G - black.B) < 20 && Math.Abs(PixelColor.B - black.B) < 20)
                             {
-                                data[i, j] = 1;
-                                Debug.Write("1");
-                                if (visuallytrack.Checked)
+
+                                colorpts.Add(new Point(i,j));
+                                
+                                if (visuallytrack.Checked) //If option is checked, highlight pixels that fit color criteria 
                                 {
                                     Pen pen = new Pen(Color.White, 2);
                                     Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
                                     bgimage.DrawRectangle(pen, i, j, 2, 2);
                                 }
-                            }
-                            //else if (Math.Abs(PixelColor.R - green.R) < 20 && Math.Abs(PixelColor.G - green.G) < 20 && Math.Abs(PixelColor.B - green.B) < 20)
-                            //{
-                            //    data[i, j] = 2;
-                            //    Debug.Write("2");
-                            //    ;
-                            //}
-                            //else if (Math.Abs(PixelColor.R - blue.R) < 20 && Math.Abs(PixelColor.G - blue.G) < 20 && Math.Abs(PixelColor.B - blue.B) < 20)
-                            //{
-                            //    data[i, j] = 3;
-                            //    Debug.Write("3");
-                            //}
-                            else
-                            {
-                                data[i, j] = 0;
 
                             }
                         }
-
                     
                     }
+
+                    if (colorpts.Count > 0)
+                    {
+                        //Sort points to find highest and lowest for each axis
+                        //Divide min/max by 2 and combine to find a center cooerdinate
+                        List<Point> pointlistx = (from p in colorpts
+                                                  orderby p.X ascending
+                                                  select p).ToList<Point>();
+
+                        centerx = pointlistx.ToArray<Point>()[pointlistx.Count / 2].X;
+
+                        List<Point> pointlisty = (from p in colorpts
+                                                  orderby p.Y ascending
+                                                  select p).ToList<Point>();
+
+
+                        centery = pointlisty.ToArray<Point>()[pointlisty.Count / 2].Y;
+
+                        center = new Point(centerx, centery);
+
+                        //Add center to list of center points 
+                        centerpts.Add(center);
+
+                        //Adds center point to displayed list
+                        colordata.Items.Add(center);
+
+                    }
+
+                    if (visuallytrack.Checked) //Puts red point at center if visual tracking is enabled
+                    {
+                        Pen pen = new Pen(Color.Red, 3);
+                        Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
+                        bgimage.DrawRectangle(pen, center.X, center.Y, 3, 3);
+                    }
+
                 
-            }
+            }//End of foreach frame loop
+
+            //Random number generator code
         }
 
-            // Passes colored pixels to debug console
 
-            //    for (int i = 0; i < 320; i++)
-            ////    {
-
-            ////        for (int j = 0; j < 240; j++)
-            ////        {
-
-            ////            if (data[i, j] > 0)
-            ////            {
-            ////                Debug.Write(data[i, j] + ",");
-            ////            }
-            ////        }
-
-            ////    }
-            ////}
 
 
         private void colordata_SelectedIndexChanged(object sender, EventArgs e)
@@ -213,6 +204,11 @@ namespace WindowsFormsApplication1
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void visuallytrack_CheckedChanged(object sender, EventArgs e)
         {
 
         }
