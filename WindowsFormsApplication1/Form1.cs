@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-using System.Diagnostics; 
+using System.Diagnostics;
 
 //Imports AForge libraries
 using AForge.Video;
@@ -54,7 +54,7 @@ namespace WindowsFormsApplication1
                 catch { }
 
                 //Create NewFrame event handler
-                //(This one triggers every time a new frame/image is captured
+                //This one triggers every time a new frame/image is captured
                 videoSource.NewFrame += new AForge.Video.NewFrameEventHandler(videoSource_NewFrame);
 
                 //Start recording
@@ -89,18 +89,17 @@ namespace WindowsFormsApplication1
             int centerx;
             int centery;
 
+            List<Point> colorpts = new List<Point>();
             List<Point> centerpts = new List<Point>();
-            Point center = new Point(160, 120);
+            List<Double> randoms = new List<Double>();
+            Point center = new Point(0, 0);
 
+
+            var oldx = 1;
+            var oldy = 1;
 
             foreach (Bitmap bitmap in frames)
             {   
-
-                //Sets imagebox bg to image from bitmap array
-                stream.BackgroundImage = bitmap;
-                Application.DoEvents();
-
-                List<Point> colorpts = new List<Point>();
 
                 //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each black pixel a marking space in an array
                 int[,] data = new int[320, 240];
@@ -120,7 +119,7 @@ namespace WindowsFormsApplication1
                                 if (visuallytrack.Checked) //If option is checked, highlight pixels that fit color criteria 
                                 {
                                     Pen pen = new Pen(Color.White, 2);
-                                    Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
+                                    Graphics bgimage = Graphics.FromImage(bitmap);
                                     bgimage.DrawRectangle(pen, i, j, 2, 2);
                                 }
 
@@ -129,10 +128,9 @@ namespace WindowsFormsApplication1
                     
                     }
 
-                    if (colorpts.Count > 0)
+                    if (colorpts.Count > 0) //Center-finding code
                     {
                         //Sort points to find highest and lowest for each axis
-                        //Divide min/max by 2 and combine to find a center cooerdinate
                         List<Point> pointlistx = (from p in colorpts
                                                   orderby p.X ascending
                                                   select p).ToList<Point>();
@@ -146,6 +144,7 @@ namespace WindowsFormsApplication1
 
                         centery = pointlisty.ToArray<Point>()[pointlisty.Count / 2].Y;
 
+                        
                         center = new Point(centerx, centery);
 
                         //Add center to list of center points 
@@ -159,14 +158,53 @@ namespace WindowsFormsApplication1
                     if (visuallytrack.Checked) //Puts red point at center if visual tracking is enabled
                     {
                         Pen pen = new Pen(Color.Red, 3);
-                        Graphics bgimage = Graphics.FromImage(stream.BackgroundImage);
+                        Graphics bgimage = Graphics.FromImage(bitmap);
                         bgimage.DrawRectangle(pen, center.X, center.Y, 3, 3);
                     }
 
-                
+                    //Sets imagebox bg to image from bitmap array
+                    stream.BackgroundImage = bitmap;
+                    Application.DoEvents();
+    
             }//End of foreach frame loop
 
-            //Random number generator code
+            foreach (Point centerpt in centerpts) 
+            {
+                //Random number generator code
+                var x = centerpt.X;
+                var y = centerpt.Y;
+
+                if (oldx != 1 && oldy != 1) //Ensures first point is rejected
+                {
+                    var deltax = x - oldx;
+                    var deltay = y - oldy;
+                    var deltaxy = deltax*deltay;
+
+                    string combo = (Math.Abs(deltax + y) + "." + Math.Abs(deltay + x));
+
+                    double xy = x * y;
+
+                    if (xy!=0 && combo != "0.0" && deltaxy !=0) 
+                    {
+                        //Creates large number based off generator data
+
+                        var reallybignumber = Convert.ToDouble(combo) * deltaxy;
+                        string bgnum = reallybignumber.ToString();
+
+                        //Gets last 8 digits of large number
+
+                        double randomnum = Convert.ToDouble(bgnum.Substring(bgnum.Length - 8, 8));
+                        randoms.Add(randomnum);
+                        colordata.Items.Add(randomnum);
+
+                    }
+
+                }
+
+                oldx = x;
+                oldy = y;
+            }
+
         }
 
 
