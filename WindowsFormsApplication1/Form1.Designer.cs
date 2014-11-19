@@ -40,6 +40,10 @@
             this.colorviewred = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.visuallytrack = new System.Windows.Forms.RadioButton();
+            this.webcams = new System.Windows.Forms.ComboBox();
+            this.webcamselect = new System.Windows.Forms.Label();
+            this.reslist = new System.Windows.Forms.Label();
+            this.resolutionlist = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.stream)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,7 +107,7 @@
             // 
             // calibratered
             // 
-            this.calibratered.Location = new System.Drawing.Point(366, 274);
+            this.calibratered.Location = new System.Drawing.Point(630, 274);
             this.calibratered.Name = "calibratered";
             this.calibratered.Size = new System.Drawing.Size(94, 23);
             this.calibratered.TabIndex = 6;
@@ -129,7 +133,7 @@
             // 
             // colorviewred
             // 
-            this.colorviewred.Location = new System.Drawing.Point(366, 303);
+            this.colorviewred.Location = new System.Drawing.Point(630, 303);
             this.colorviewred.Name = "colorviewred";
             this.colorviewred.Size = new System.Drawing.Size(18, 15);
             this.colorviewred.TabIndex = 11;
@@ -155,11 +159,51 @@
             this.visuallytrack.UseVisualStyleBackColor = true;
             this.visuallytrack.CheckedChanged += new System.EventHandler(this.visuallytrack_CheckedChanged);
             // 
+            // webcams
+            // 
+            this.webcams.FormattingEnabled = true;
+            this.webcams.Location = new System.Drawing.Point(366, 275);
+            this.webcams.Name = "webcams";
+            this.webcams.Size = new System.Drawing.Size(121, 21);
+            this.webcams.TabIndex = 16;
+            this.webcams.SelectedIndexChanged += new System.EventHandler(this.webcams_SelectedIndexChanged);
+            // 
+            // webcamselect
+            // 
+            this.webcamselect.AutoSize = true;
+            this.webcamselect.Location = new System.Drawing.Point(366, 258);
+            this.webcamselect.Name = "webcamselect";
+            this.webcamselect.Size = new System.Drawing.Size(104, 13);
+            this.webcamselect.TabIndex = 17;
+            this.webcamselect.Text = "1. Select a Webcam";
+            this.webcamselect.Click += new System.EventHandler(this.webcamselect_Click);
+            // 
+            // reslist
+            // 
+            this.reslist.AutoSize = true;
+            this.reslist.Location = new System.Drawing.Point(514, 258);
+            this.reslist.Name = "reslist";
+            this.reslist.Size = new System.Drawing.Size(104, 13);
+            this.reslist.TabIndex = 18;
+            this.reslist.Text = "2. SelectResolutions";
+            // 
+            // resolutionlist
+            // 
+            this.resolutionlist.FormattingEnabled = true;
+            this.resolutionlist.Location = new System.Drawing.Point(517, 274);
+            this.resolutionlist.Name = "resolutionlist";
+            this.resolutionlist.Size = new System.Drawing.Size(97, 21);
+            this.resolutionlist.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 330);
+            this.Controls.Add(this.resolutionlist);
+            this.Controls.Add(this.reslist);
+            this.Controls.Add(this.webcamselect);
+            this.Controls.Add(this.webcams);
             this.Controls.Add(this.visuallytrack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.colorviewred);
@@ -195,6 +239,10 @@
         private System.Windows.Forms.Panel colorviewred;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton visuallytrack;
+        private System.Windows.Forms.ComboBox webcams;
+        private System.Windows.Forms.Label webcamselect;
+        private System.Windows.Forms.Label reslist;
+        private System.Windows.Forms.ComboBox resolutionlist;
     }
 }
 

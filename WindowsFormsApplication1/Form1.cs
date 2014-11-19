@@ -21,37 +21,46 @@ namespace WindowsFormsApplication1
 
     public partial class Form1 : Form
     {
-        List<Bitmap> frames = new List<Bitmap>();
-
+        private FilterInfoCollection videosources;
+        private VideoCaptureDevice videoSource;
         public Form1()
         {
             InitializeComponent();
+
+            //List all available video sources
+            videosources = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+            //Adds each webcams to options list
+            foreach (FilterInfo VideoCaptureDevice in videosources)
+            {
+                webcams.Items.Add(VideoCaptureDevice.Name);
+            }
+
+            webcams.SelectedIndex = 0;
+
+            videoSource = new VideoCaptureDevice(videosources[webcams.SelectedIndex].MonikerString); 
+
+            //Populates resolution list for default webcam
+            for (int i = 0; i < videoSource.VideoCapabilities.Length; i++ )
+            {
+                resolutionlist.Items.Add(videoSource.VideoCapabilities[i].FrameSize.ToString()); 
+            }
+
+            resolutionlist.SelectedIndex = 0;  
         }
 
-        //Create webcam object
-        VideoCaptureDevice videoSource;
 
         //Declares blank RGB colors
         public static Color black = Color.FromArgb(0,0,0);
 
+        //Declares list to be used to store image frames
+        List<Bitmap> frames = new List<Bitmap>();
+
         private void start_Click(object sender, EventArgs e)
         {
-            //List all available video sources
-            FilterInfoCollection videosources = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-
-            if (videosources != null)
-            {
-
-                //Use first video source
-                videoSource = new VideoCaptureDevice(videosources[0].MonikerString);
-
-                try
-                {
-                    videoSource.VideoResolution = videoSource.VideoCapabilities[2];  
-                }
-                
-
-                catch { }
+                frames.Clear();
+                videoSource = new VideoCaptureDevice(videosources[webcams.SelectedIndex].MonikerString); 
+                videoSource.VideoResolution = videoSource.VideoCapabilities[resolutionlist.SelectedIndex];
 
                 //Create NewFrame event handler
                 //This one triggers every time a new frame/image is captured
@@ -59,7 +68,7 @@ namespace WindowsFormsApplication1
 
                 //Start recording
                 videoSource.Start();
-            }
+            
         }
         void videoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
@@ -83,6 +92,7 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             stream.BackgroundImage = null;
             colordata.Items.Clear();
 
@@ -125,7 +135,6 @@ namespace WindowsFormsApplication1
 
                             }
                         }
-                    
                     }
 
                     if (colorpts.Count > 0) //Center-finding code
@@ -188,12 +197,14 @@ namespace WindowsFormsApplication1
                     {
                         //Creates large number based off generator data
 
-                        var reallybignumber = Convert.ToDouble(combo) * deltaxy;
-                        string bgnum = reallybignumber.ToString();
+                        var seedvalue = Math.Floor((Convert.ToDouble(combo) * deltaxy + Math.Pow(x,2) * Math.Pow(y,2)));
+                        string bignum = seedvalue.ToString();
 
-                        //Gets last 8 digits of large number
+                        //Gets last 8 digits of seed number
 
-                        double randomnum = Convert.ToDouble(bgnum.Substring(bgnum.Length - 8, 8));
+                        int randomnum = Convert.ToInt32(bignum.Substring(bignum.Length - 8, 8));
+
+                        var rand = new Random(randomnum).Next();
                         randoms.Add(randomnum);
                         colordata.Items.Add(randomnum);
 
@@ -249,6 +260,35 @@ namespace WindowsFormsApplication1
         private void visuallytrack_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void webcamselect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void webcams_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            resolutionlist.Items.Clear();
+            frames.Clear();
+
+
+            //Use first video source
+            videoSource = new VideoCaptureDevice(videosources[webcams.SelectedIndex].MonikerString);
+
+            try
+            { }
+
+            catch { }
+
+            //Populates webcam resolution list
+            for (int i = 0; i < videoSource.VideoCapabilities.Length; i++)
+            {
+                resolutionlist.Items.Add(videoSource.VideoCapabilities[i].FrameSize.ToString()); 
+            }
+
+            
         }
  
         
