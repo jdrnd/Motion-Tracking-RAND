@@ -51,7 +51,7 @@ namespace WindowsFormsApplication1
 
 
         //Declares blank RGB colors
-        public static Color black = Color.FromArgb(0,0,0);
+        public static Color selectedcolor = Color.FromArgb(0,0,0);
 
         //Declares list to be used to store image frames
         List<Bitmap> frames = new List<Bitmap>();
@@ -111,7 +111,7 @@ namespace WindowsFormsApplication1
             foreach (Bitmap bitmap in frames)
             {   
 
-                //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each black pixel a marking space in an array
+                //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each selectedcolor pixel a marking space in an array
                 int[,] data = new int[320, 240];
 
                     for (int i = 0; i < 320; i++)
@@ -121,7 +121,7 @@ namespace WindowsFormsApplication1
 
                             Color PixelColor = bitmap.GetPixel(i, j);
 
-                            if (Math.Abs(PixelColor.R - black.R) < 20 && Math.Abs(PixelColor.G - black.B) < 20 && Math.Abs(PixelColor.B - black.B) < 20)
+                            if (Math.Abs(PixelColor.R - selectedcolor.R) < sensitivity.Value && Math.Abs(PixelColor.G - selectedcolor.B) < sensitivity.Value && Math.Abs(PixelColor.B - selectedcolor.B) < sensitivity.Value)
                             {
 
                                 colorpts.Add(new Point(i,j));
@@ -139,22 +139,44 @@ namespace WindowsFormsApplication1
 
                     if (colorpts.Count > 0) //Center-finding code
                     {
-                        //Sort points to find highest and lowest for each axis
+                        /* Sort points to find highest and lowest for each axis
                         List<Point> pointlistx = (from p in colorpts
                                                   orderby p.X ascending
                                                   select p).ToList<Point>();
+                        */
+                        int totalx = 0;
+                        int totaly = 0;
 
-                        centerx = pointlistx.ToArray<Point>()[pointlistx.Count / 2].X;
+                        foreach (Point p in colorpts)
+                        {
+                            totalx += p.X;
+                            totaly += p.Y;
+                        }
 
-                        List<Point> pointlisty = (from p in colorpts
-                                                  orderby p.Y ascending
+                        centerx = totalx / colorpts.Count;
+                        centery = totaly / colorpts.Count;
+
+                        //centerx = pointlistx.Sum / pointlistx.Count;
+
+                        //centerx = pointlistx.ToArray<Point>()[pointlistx.Count / 2].X;
+
+                        /* List<Point> pointlisty = (from p in colorpts
+                                                  //orderby p.Y ascending
                                                   select p).ToList<Point>();
+                        */
+
+                        //centery = pointlisty.ToArray<Point>()[pointlisty.Count / 2].Y;
 
 
-                        centery = pointlisty.ToArray<Point>()[pointlisty.Count / 2].Y;
-
-                        
                         center = new Point(centerx, centery);
+
+                        if (visuallytrack.Checked) //Puts red point at center if visual tracking is enabled
+                        {
+                            Pen pen = new Pen(Color.Red, 3);
+                            Graphics bgimage = Graphics.FromImage(bitmap);
+                            bgimage.DrawRectangle(pen, center.X, center.Y, 3, 3);
+                        }
+                        else { };
 
                         //Add center to list of center points 
                         centerpts.Add(center);
@@ -163,18 +185,13 @@ namespace WindowsFormsApplication1
                         colordata.Items.Add(center);
 
                     }
-
-                    if (visuallytrack.Checked) //Puts red point at center if visual tracking is enabled
-                    {
-                        Pen pen = new Pen(Color.Red, 3);
-                        Graphics bgimage = Graphics.FromImage(bitmap);
-                        bgimage.DrawRectangle(pen, center.X, center.Y, 3, 3);
-                    }
+                    else { };
 
                     //Sets imagebox bg to image from bitmap array
                     stream.BackgroundImage = bitmap;
                     Application.DoEvents();
-    
+                    colorpts.Clear();
+
             }//End of foreach frame loop
 
             foreach (Point centerpt in centerpts) 
@@ -193,7 +210,7 @@ namespace WindowsFormsApplication1
 
                     double xy = x * y;
 
-                    if (xy!=0 && combo != "0.0" && deltaxy !=0) 
+                    /* if (xy!=0 && combo != "0.0" && deltaxy !=0) 
                     {
                         //Creates large number based off generator data
 
@@ -208,7 +225,7 @@ namespace WindowsFormsApplication1
                         randoms.Add(randomnum);
                         colordata.Items.Add(randomnum);
 
-                    }
+                    } */
 
                 }
 
@@ -242,8 +259,8 @@ namespace WindowsFormsApplication1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            black = colordisplay.BackColor;
-            colorviewred.BackColor = black;
+            selectedcolor = colordisplay.BackColor;
+            colorviewred.BackColor = selectedcolor;
         }
 
 
@@ -289,6 +306,17 @@ namespace WindowsFormsApplication1
             }
 
             
+        }
+
+        private void sensitivity_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chop_Click(object sender, EventArgs e)
+        {
+            int chopped = Convert.ToInt32(numbertoremove.Text);
+            frames.RemoveRange(0, chopped);
         }
  
         

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Button chop;
             this.stream = new System.Windows.Forms.PictureBox();
             this.start = new System.Windows.Forms.Button();
             this.stop = new System.Windows.Forms.Button();
@@ -44,7 +45,13 @@
             this.webcamselect = new System.Windows.Forms.Label();
             this.reslist = new System.Windows.Forms.Label();
             this.resolutionlist = new System.Windows.Forms.ComboBox();
+            this.sensitivity = new System.Windows.Forms.TrackBar();
+            this.sensitive = new System.Windows.Forms.Label();
+            this.choplabel = new System.Windows.Forms.Label();
+            this.numbertoremove = new System.Windows.Forms.TextBox();
+            chop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.stream)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sensitivity)).BeginInit();
             this.SuspendLayout();
             // 
             // stream
@@ -89,9 +96,9 @@
             // colordata
             // 
             this.colordata.FormattingEnabled = true;
-            this.colordata.Location = new System.Drawing.Point(366, 13);
+            this.colordata.Location = new System.Drawing.Point(510, 12);
             this.colordata.Name = "colordata";
-            this.colordata.Size = new System.Drawing.Size(248, 238);
+            this.colordata.Size = new System.Drawing.Size(104, 238);
             this.colordata.TabIndex = 4;
             this.colordata.SelectedIndexChanged += new System.EventHandler(this.colordata_SelectedIndexChanged);
             // 
@@ -195,11 +202,65 @@
             this.resolutionlist.Size = new System.Drawing.Size(97, 21);
             this.resolutionlist.TabIndex = 19;
             // 
+            // sensitivity
+            // 
+            this.sensitivity.LargeChange = 10;
+            this.sensitivity.Location = new System.Drawing.Point(256, 273);
+            this.sensitivity.Maximum = 100;
+            this.sensitivity.Name = "sensitivity";
+            this.sensitivity.Size = new System.Drawing.Size(104, 45);
+            this.sensitivity.SmallChange = 5;
+            this.sensitivity.TabIndex = 20;
+            this.sensitivity.TickFrequency = 10;
+            this.sensitivity.UseWaitCursor = true;
+            this.sensitivity.Value = 20;
+            this.sensitivity.Scroll += new System.EventHandler(this.sensitivity_Scroll);
+            // 
+            // sensitive
+            // 
+            this.sensitive.AutoSize = true;
+            this.sensitive.Location = new System.Drawing.Point(279, 303);
+            this.sensitive.Name = "sensitive";
+            this.sensitive.Size = new System.Drawing.Size(54, 13);
+            this.sensitive.TabIndex = 21;
+            this.sensitive.Text = "Sensitivity";
+            // 
+            // choplabel
+            // 
+            this.choplabel.AutoSize = true;
+            this.choplabel.Location = new System.Drawing.Point(340, 13);
+            this.choplabel.Name = "choplabel";
+            this.choplabel.Size = new System.Drawing.Size(128, 13);
+            this.choplabel.TabIndex = 22;
+            this.choplabel.Text = "Remove Leading Frames:";
+            // 
+            // numbertoremove
+            // 
+            this.numbertoremove.Location = new System.Drawing.Point(474, 10);
+            this.numbertoremove.Name = "numbertoremove";
+            this.numbertoremove.Size = new System.Drawing.Size(28, 20);
+            this.numbertoremove.TabIndex = 23;
+            // 
+            // chop
+            // 
+            chop.Location = new System.Drawing.Point(343, 29);
+            chop.Name = "chop";
+            chop.Size = new System.Drawing.Size(75, 23);
+            chop.TabIndex = 24;
+            chop.Text = "Chop";
+            chop.UseVisualStyleBackColor = true;
+            chop.Click += new System.EventHandler(this.chop_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 330);
+            this.Controls.Add(chop);
+            this.Controls.Add(this.numbertoremove);
+            this.Controls.Add(this.choplabel);
+            this.Controls.Add(this.sensitive);
+            this.Controls.Add(this.sensitivity);
             this.Controls.Add(this.resolutionlist);
             this.Controls.Add(this.reslist);
             this.Controls.Add(this.webcamselect);
@@ -217,9 +278,10 @@
             this.Controls.Add(this.start);
             this.Controls.Add(this.stream);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Motion Tracking";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.stream)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sensitivity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,6 +305,10 @@
         private System.Windows.Forms.Label webcamselect;
         private System.Windows.Forms.Label reslist;
         private System.Windows.Forms.ComboBox resolutionlist;
+        private System.Windows.Forms.TrackBar sensitivity;
+        private System.Windows.Forms.Label sensitive;
+        private System.Windows.Forms.Label choplabel;
+        private System.Windows.Forms.TextBox numbertoremove;
     }
 }
 
