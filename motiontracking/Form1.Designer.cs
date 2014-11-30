@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace motiontracking
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Button chop;
+            System.Windows.Forms.Button chop2;
             this.stream = new System.Windows.Forms.PictureBox();
             this.start = new System.Windows.Forms.Button();
             this.stop = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.colordisplay = new System.Windows.Forms.Panel();
             this.colorviewred = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.visuallytrack = new System.Windows.Forms.RadioButton();
             this.webcams = new System.Windows.Forms.ComboBox();
             this.webcamselect = new System.Windows.Forms.Label();
             this.reslist = new System.Windows.Forms.Label();
@@ -49,10 +49,36 @@
             this.sensitive = new System.Windows.Forms.Label();
             this.choplabel = new System.Windows.Forms.Label();
             this.numbertoremove = new System.Windows.Forms.TextBox();
+            this.chop2label = new System.Windows.Forms.Label();
+            this.numbertoremove2 = new System.Windows.Forms.TextBox();
+            this.digitslabel = new System.Windows.Forms.Label();
+            this.digitsofentropy = new System.Windows.Forms.TextBox();
+            this.visuallytrack = new System.Windows.Forms.CheckBox();
             chop = new System.Windows.Forms.Button();
+            chop2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.stream)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivity)).BeginInit();
             this.SuspendLayout();
+            // 
+            // chop
+            // 
+            chop.Location = new System.Drawing.Point(343, 26);
+            chop.Name = "chop";
+            chop.Size = new System.Drawing.Size(75, 23);
+            chop.TabIndex = 24;
+            chop.Text = "Chop";
+            chop.UseVisualStyleBackColor = true;
+            chop.Click += new System.EventHandler(this.chop_Click);
+            // 
+            // chop2
+            // 
+            chop2.Location = new System.Drawing.Point(345, 90);
+            chop2.Name = "chop2";
+            chop2.Size = new System.Drawing.Size(75, 23);
+            chop2.TabIndex = 27;
+            chop2.Text = "Chop";
+            chop2.UseVisualStyleBackColor = true;
+            chop2.Click += new System.EventHandler(this.chop2_Click);
             // 
             // stream
             // 
@@ -155,17 +181,6 @@
             this.label1.Text = "Visually Track?";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // visuallytrack
-            // 
-            this.visuallytrack.AutoSize = true;
-            this.visuallytrack.Location = new System.Drawing.Point(710, 135);
-            this.visuallytrack.Name = "visuallytrack";
-            this.visuallytrack.Size = new System.Drawing.Size(14, 13);
-            this.visuallytrack.TabIndex = 15;
-            this.visuallytrack.TabStop = true;
-            this.visuallytrack.UseVisualStyleBackColor = true;
-            this.visuallytrack.CheckedChanged += new System.EventHandler(this.visuallytrack_CheckedChanged);
-            // 
             // webcams
             // 
             this.webcams.FormattingEnabled = true;
@@ -228,7 +243,7 @@
             // choplabel
             // 
             this.choplabel.AutoSize = true;
-            this.choplabel.Location = new System.Drawing.Point(340, 13);
+            this.choplabel.Location = new System.Drawing.Point(340, 10);
             this.choplabel.Name = "choplabel";
             this.choplabel.Size = new System.Drawing.Size(128, 13);
             this.choplabel.TabIndex = 22;
@@ -241,21 +256,62 @@
             this.numbertoremove.Size = new System.Drawing.Size(28, 20);
             this.numbertoremove.TabIndex = 23;
             // 
-            // chop
+            // chop2label
             // 
-            chop.Location = new System.Drawing.Point(343, 29);
-            chop.Name = "chop";
-            chop.Size = new System.Drawing.Size(75, 23);
-            chop.TabIndex = 24;
-            chop.Text = "Chop";
-            chop.UseVisualStyleBackColor = true;
-            chop.Click += new System.EventHandler(this.chop_Click);
+            this.chop2label.AutoSize = true;
+            this.chop2label.Location = new System.Drawing.Point(342, 74);
+            this.chop2label.Name = "chop2label";
+            this.chop2label.Size = new System.Drawing.Size(124, 13);
+            this.chop2label.TabIndex = 25;
+            this.chop2label.Text = "Remove Trailing Frames:";
             // 
-            // Form1
+            // numbertoremove2
+            // 
+            this.numbertoremove2.Location = new System.Drawing.Point(474, 71);
+            this.numbertoremove2.Name = "numbertoremove2";
+            this.numbertoremove2.Size = new System.Drawing.Size(28, 20);
+            this.numbertoremove2.TabIndex = 26;
+            // 
+            // digitslabel
+            // 
+            this.digitslabel.AutoSize = true;
+            this.digitslabel.Location = new System.Drawing.Point(342, 135);
+            this.digitslabel.Name = "digitslabel";
+            this.digitslabel.Size = new System.Drawing.Size(114, 13);
+            this.digitslabel.TabIndex = 28;
+            this.digitslabel.Text = "Digits of Entropy (1-10)";
+            this.digitslabel.UseWaitCursor = true;
+            this.digitslabel.Click += new System.EventHandler(this.digitslabel_Click);
+            // 
+            // digitsofentropy
+            // 
+            this.digitsofentropy.Location = new System.Drawing.Point(474, 132);
+            this.digitsofentropy.Name = "digitsofentropy";
+            this.digitsofentropy.Size = new System.Drawing.Size(28, 20);
+            this.digitsofentropy.TabIndex = 29;
+            this.digitsofentropy.Text = "5";
+            this.digitsofentropy.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // visuallytrack
+            // 
+            this.visuallytrack.AutoSize = true;
+            this.visuallytrack.Location = new System.Drawing.Point(711, 135);
+            this.visuallytrack.Name = "visuallytrack";
+            this.visuallytrack.Size = new System.Drawing.Size(15, 14);
+            this.visuallytrack.TabIndex = 30;
+            this.visuallytrack.UseVisualStyleBackColor = true;
+            // 
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 330);
+            this.Controls.Add(this.visuallytrack);
+            this.Controls.Add(this.digitsofentropy);
+            this.Controls.Add(this.digitslabel);
+            this.Controls.Add(chop2);
+            this.Controls.Add(this.numbertoremove2);
+            this.Controls.Add(this.chop2label);
             this.Controls.Add(chop);
             this.Controls.Add(this.numbertoremove);
             this.Controls.Add(this.choplabel);
@@ -265,7 +321,6 @@
             this.Controls.Add(this.reslist);
             this.Controls.Add(this.webcamselect);
             this.Controls.Add(this.webcams);
-            this.Controls.Add(this.visuallytrack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.colorviewred);
             this.Controls.Add(this.colordisplay);
@@ -277,9 +332,9 @@
             this.Controls.Add(this.stop);
             this.Controls.Add(this.start);
             this.Controls.Add(this.stream);
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "Motion Tracking";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.stream)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivity)).EndInit();
             this.ResumeLayout(false);
@@ -300,7 +355,6 @@
         private System.Windows.Forms.Panel colordisplay;
         private System.Windows.Forms.Panel colorviewred;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton visuallytrack;
         private System.Windows.Forms.ComboBox webcams;
         private System.Windows.Forms.Label webcamselect;
         private System.Windows.Forms.Label reslist;
@@ -309,6 +363,11 @@
         private System.Windows.Forms.Label sensitive;
         private System.Windows.Forms.Label choplabel;
         private System.Windows.Forms.TextBox numbertoremove;
+        private System.Windows.Forms.Label chop2label;
+        private System.Windows.Forms.TextBox numbertoremove2;
+        private System.Windows.Forms.Label digitslabel;
+        private System.Windows.Forms.TextBox digitsofentropy;
+        private System.Windows.Forms.CheckBox visuallytrack;
     }
 }
 

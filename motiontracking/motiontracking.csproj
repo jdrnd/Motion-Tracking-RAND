@@ -7,7 +7,7 @@
     <ProjectGuid>{5CA153AA-C216-49DD-B05E-D8569BEEA060}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MotionTracking</RootNamespace>
+    <RootNamespace>motiontracking</RootNamespace>
     <AssemblyName>Motion Tracking</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
