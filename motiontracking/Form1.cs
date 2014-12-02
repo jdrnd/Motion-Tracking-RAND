@@ -1,4 +1,16 @@
-﻿using System;
+﻿/* Motion Tracking and Entropy Generator Copyright (C) 2014 Joel Ruhland
+
+This program is free software: you can redistribute it and/or modify it under the terms of the 
+GNU General Public License as published by the Free Software Foundation, either version 3 of 
+the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+See the GNU General Public License for more details.
+
+Please view the included "GNUGPLv3" file for full licencing terms.*/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -98,8 +110,8 @@ namespace motiontracking
             stream.BackgroundImage = null;
             colordata.Items.Clear();
 
-            int centerx;
-            int centery;
+            int centerx = 0;
+            int centery = 0;
 
             List<Point> colorpts = new List<Point>();
             List<Point> centerpts = new List<Point>();
@@ -112,16 +124,17 @@ namespace motiontracking
 
             List<Bitmap> framesbackup = new List<Bitmap>();
 
-            foreach (Bitmap frame in frames) {
-                framesbackup.Add(frame);
+            foreach (Bitmap frame in frames) 
+            {
+                framesbackup.Add((Bitmap)frame.Clone());
             }
 
-            var oldx = 1;
-            var oldy = 1;
+            var oldx = 0;
+            var oldy = 0;
 
-            for (int z = 0; z < framesbackup.Count; z++)
+            for (int z = 0; z < frames.Count; z++)
             {
-                Bitmap frame = framesbackup[z];
+                Bitmap frame = frames[z];
                 Graphics bgimage = Graphics.FromImage(frame); 
 
                 //Goes through image as a pixel array and assigns number values to rgb colors, then assigns each selectedcolor pixel a marking space in an array
@@ -170,7 +183,6 @@ namespace motiontracking
                             Pen pen = new Pen(Color.Red, 3);
                             bgimage.DrawRectangle(pen, center.X, center.Y, 3, 3);
                         }
-                        else { };
 
                         //Add center to list of center points 
                         centerpts.Add(center);
@@ -179,8 +191,6 @@ namespace motiontracking
                         colordata.Items.Add(center);
 
                     }
-                    else { };
-
                     
                     //Sets imagebox bg to image from bitmap array
                     stream.BackgroundImage = frame;
@@ -189,19 +199,13 @@ namespace motiontracking
 
             }//End of foreach frame loop
 
-            framesbackup.Clear(); //Restores un-inked array of bitmaps
-            /* foreach (Bitmap frame in framesbackup)
-            {
-                frames.Add(frame);
-            }*/
-
             foreach (Point centerpt in centerpts) 
             {
                 //Random number generator code
                 var x = centerpt.X;
                 var y = centerpt.Y;
 
-                if (oldx != 1 && oldy != 1) //Ensures first point is rejected
+                if (oldx != 0 && oldy != 0) //Ensures first point is rejected
                 {
                     var deltax = x - oldx;
                     var deltay = y - oldy;
@@ -215,7 +219,8 @@ namespace motiontracking
                     {
                         //Creates large number based off generator data
 
-                        var seedvalue = Math.Ceiling( Math.Pow( Convert.ToDouble(combo) * Math.Abs(deltaxy) + Math.Pow(x,2), Convert.ToInt32(digitsofentropy.Text)  ) * Math.Pow(y,2) ) * (DateTime.Now.Millisecond + 1);
+                        var seedvalue = Math.Ceiling( Math.Pow( Convert.ToDouble(combo) * Math.Abs(deltaxy) 
+                            + Math.Pow(x,2), Convert.ToInt32(digitsofentropy.Text)  ) * Math.Pow(y,2) ) * (DateTime.Now.Millisecond + 1);
                         double bignumnoexp = double.Parse(Convert.ToString(seedvalue));
                         string bignum = bignumnoexp.ToString();
 
@@ -248,19 +253,11 @@ namespace motiontracking
                 oldy = y;
             }
 
-        }
-
-
-
-
-        private void colordata_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pixelpickerlabel_Click(object sender, EventArgs e)
-        {
-
+            frames = new List<Bitmap>();
+            foreach (Bitmap frame in framesbackup)
+            {
+                frames.Add(frame);
+            }
         }
 
         private void stream_Click(object sender, EventArgs e)
@@ -278,54 +275,20 @@ namespace motiontracking
             colorviewred.BackColor = selectedcolor;
         }
 
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void visuallytrack_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void webcamselect_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void webcams_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             resolutionlist.Items.Clear();
             frames.Clear();
 
-
             //Use first video source
             videoSource = new VideoCaptureDevice(videosources[webcams.SelectedIndex].MonikerString);
-
-            try
-            { }
-
-            catch { }
 
             //Populates webcam resolution list
             for (int i = 0; i < videoSource.VideoCapabilities.Length; i++)
             {
                 resolutionlist.Items.Add(videoSource.VideoCapabilities[i].FrameSize.ToString()); 
-            }
-
-            
-        }
-
-        private void sensitivity_Scroll(object sender, EventArgs e)
-        {
-
+            }            
         }
 
         private void chop_Click(object sender, EventArgs e)
@@ -343,18 +306,5 @@ namespace motiontracking
                 frames.RemoveAt(frames.Count -1);
             }
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void digitslabel_Click(object sender, EventArgs e)
-        {
-
-        }
- 
-        
-
     }
 }

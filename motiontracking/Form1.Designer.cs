@@ -126,7 +126,6 @@
             this.colordata.Name = "colordata";
             this.colordata.Size = new System.Drawing.Size(104, 238);
             this.colordata.TabIndex = 4;
-            this.colordata.SelectedIndexChanged += new System.EventHandler(this.colordata_SelectedIndexChanged);
             // 
             // pixelpickerlabel
             // 
@@ -136,7 +135,6 @@
             this.pixelpickerlabel.Size = new System.Drawing.Size(132, 13);
             this.pixelpickerlabel.TabIndex = 5;
             this.pixelpickerlabel.Text = "Click a pixel to get its color";
-            this.pixelpickerlabel.Click += new System.EventHandler(this.pixelpickerlabel_Click);
             // 
             // calibratered
             // 
@@ -179,7 +177,6 @@
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 14;
             this.label1.Text = "Visually Track?";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // webcams
             // 
@@ -198,7 +195,6 @@
             this.webcamselect.Size = new System.Drawing.Size(104, 13);
             this.webcamselect.TabIndex = 17;
             this.webcamselect.Text = "1. Select a Webcam";
-            this.webcamselect.Click += new System.EventHandler(this.webcamselect_Click);
             // 
             // reslist
             // 
@@ -229,7 +225,6 @@
             this.sensitivity.TickFrequency = 10;
             this.sensitivity.UseWaitCursor = true;
             this.sensitivity.Value = 20;
-            this.sensitivity.Scroll += new System.EventHandler(this.sensitivity_Scroll);
             // 
             // sensitive
             // 
@@ -281,7 +276,6 @@
             this.digitslabel.TabIndex = 28;
             this.digitslabel.Text = "Digits of Entropy (1-10)";
             this.digitslabel.UseWaitCursor = true;
-            this.digitslabel.Click += new System.EventHandler(this.digitslabel_Click);
             // 
             // digitsofentropy
             // 
@@ -290,7 +284,6 @@
             this.digitsofentropy.Size = new System.Drawing.Size(28, 20);
             this.digitsofentropy.TabIndex = 29;
             this.digitsofentropy.Text = "5";
-            this.digitsofentropy.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // visuallytrack
             // 
@@ -334,7 +327,6 @@
             this.Controls.Add(this.stream);
             this.Name = "MainWindow";
             this.Text = "Motion Tracking";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.stream)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sensitivity)).EndInit();
             this.ResumeLayout(false);
