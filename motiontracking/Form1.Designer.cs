@@ -54,6 +54,8 @@
             this.digitslabel = new System.Windows.Forms.Label();
             this.digitsofentropy = new System.Windows.Forms.TextBox();
             this.visuallytrack = new System.Windows.Forms.CheckBox();
+            this.number_of_numbers = new System.Windows.Forms.TextBox();
+            this.numbers = new System.Windows.Forms.Label();
             chop = new System.Windows.Forms.Button();
             chop2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.stream)).BeginInit();
@@ -212,6 +214,7 @@
             this.resolutionlist.Name = "resolutionlist";
             this.resolutionlist.Size = new System.Drawing.Size(97, 21);
             this.resolutionlist.TabIndex = 19;
+            this.resolutionlist.SelectedIndexChanged += new System.EventHandler(this.resolutionlist_SelectedIndexChanged);
             // 
             // sensitivity
             // 
@@ -272,9 +275,9 @@
             this.digitslabel.AutoSize = true;
             this.digitslabel.Location = new System.Drawing.Point(342, 135);
             this.digitslabel.Name = "digitslabel";
-            this.digitslabel.Size = new System.Drawing.Size(114, 13);
+            this.digitslabel.Size = new System.Drawing.Size(108, 13);
             this.digitslabel.TabIndex = 28;
-            this.digitslabel.Text = "Digits of Entropy (1-10)";
+            this.digitslabel.Text = "Digits of Entropy (1-8)";
             this.digitslabel.UseWaitCursor = true;
             // 
             // digitsofentropy
@@ -284,6 +287,7 @@
             this.digitsofentropy.Size = new System.Drawing.Size(28, 20);
             this.digitsofentropy.TabIndex = 29;
             this.digitsofentropy.Text = "5";
+            this.digitsofentropy.TextChanged += new System.EventHandler(this.digitsofentropy_TextChanged);
             // 
             // visuallytrack
             // 
@@ -294,11 +298,31 @@
             this.visuallytrack.TabIndex = 30;
             this.visuallytrack.UseVisualStyleBackColor = true;
             // 
+            // number_of_numbers
+            // 
+            this.number_of_numbers.Location = new System.Drawing.Point(341, 189);
+            this.number_of_numbers.Name = "number_of_numbers";
+            this.number_of_numbers.Size = new System.Drawing.Size(163, 20);
+            this.number_of_numbers.TabIndex = 31;
+            this.number_of_numbers.Text = "100";
+            // 
+            // numbers
+            // 
+            this.numbers.AutoSize = true;
+            this.numbers.Location = new System.Drawing.Point(343, 170);
+            this.numbers.Name = "numbers";
+            this.numbers.Size = new System.Drawing.Size(108, 13);
+            this.numbers.TabIndex = 32;
+            this.numbers.Text = "Numbers to Generate";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(767, 330);
+            this.Controls.Add(this.numbers);
+            this.Controls.Add(this.number_of_numbers);
             this.Controls.Add(this.visuallytrack);
             this.Controls.Add(this.digitsofentropy);
             this.Controls.Add(this.digitslabel);
@@ -360,6 +384,8 @@
         private System.Windows.Forms.Label digitslabel;
         private System.Windows.Forms.TextBox digitsofentropy;
         private System.Windows.Forms.CheckBox visuallytrack;
+        private System.Windows.Forms.TextBox number_of_numbers;
+        private System.Windows.Forms.Label numbers;
     }
 }
 

@@ -26,6 +26,11 @@ using System.Diagnostics;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
+//Imports Random Number Generator (Mersenne Twister) 
+using MathNet.Numerics.Random;
+using MathNet.Numerics.Distributions;
+
+
 //Imports file in/out library
 using System.IO;
 
@@ -90,8 +95,10 @@ namespace motiontracking
             
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
 
+            //Displays frames as they come in, as a semi-live video feed
             stream.BackgroundImage = bitmap;
 
+            //Adds frame to frame list for playback
             frames.Add(bitmap);
         }
 
@@ -107,8 +114,19 @@ namespace motiontracking
         private void button1_Click(object sender, EventArgs e)
         {
 
+            if (0 < (Convert.ToInt32(digitsofentropy.Text)) &&  (Convert.ToInt32(digitsofentropy.Text)) < 9) 
+            {
+            }
+            else
+            {
+                colordata.Items.Add("Please enter a number of digits between 1 and 8");
+                return;
+            }
+
             stream.BackgroundImage = null;
             colordata.Items.Clear();
+
+            int randoms_generated = 0;
 
             int centerx = 0;
             int centery = 0;
@@ -129,8 +147,13 @@ namespace motiontracking
                 framesbackup.Add((Bitmap)frame.Clone());
             }
 
+            //Determines how many random numbers should be generated from each frame
+            //int each = (Convert.ToInt32(number_of_numbers.Text) / frames.Count) - 1;
+
             var oldx = 0;
             var oldy = 0;
+
+
 
             for (int z = 0; z < frames.Count; z++)
             {
@@ -199,51 +222,63 @@ namespace motiontracking
 
             }//End of foreach frame loop
 
+
             foreach (Point centerpt in centerpts) 
             {
+
                 //Random number generator code
                 var x = centerpt.X;
                 var y = centerpt.Y;
 
+
+                if (randoms_generated >= Convert.ToInt32(number_of_numbers.Text) ) 
+                {
+                    break;
+                }
                 if (oldx != 0 && oldy != 0) //Ensures first point is rejected
                 {
                     var deltax = x - oldx;
                     var deltay = y - oldy;
-                    var deltaxy = deltax*deltay;
 
                     string combo = (Math.Abs(deltax + y) + "." + Math.Abs(deltay + x));
 
                     double xy = x * y;
+                    double deltaxy = deltax * deltay;
 
+                    //Disregards frames in which there is no change in position
                     if (xy!=0 && combo != "0.0" && deltaxy !=0) 
                     {
-                        //Creates large number based off generator data
+                        
+                        //Creates large number based off image data
+                        var seedvalue = Math.Abs( ((xy*deltax)/deltay) * (DateTime.Now.Millisecond + 1) );
 
-                        var seedvalue = Math.Ceiling( Math.Pow( Convert.ToDouble(combo) * Math.Abs(deltaxy) 
-                            + Math.Pow(x,2), Convert.ToInt32(digitsofentropy.Text)  ) * Math.Pow(y,2) ) * (DateTime.Now.Millisecond + 1);
-                        double bignumnoexp = double.Parse(Convert.ToString(seedvalue));
-                        string bignum = bignumnoexp.ToString();
+                        var random = new MersenneTwister(Convert.ToInt32(seedvalue)); 
+                        int randint = random.Next();
 
-                        bignum = bignum.Substring(0, bignum.Length - 5);
-                        //Gets last digits of seed number
-                        int digits = Convert.ToInt32(digitsofentropy.Text);
-                        int randomnum = Convert.ToInt32(bignum.Substring(bignum.Length - digits, digits));
 
-                        var rand = new Random(randomnum).Next();
-                        string randstr = Convert.ToString(rand);
-                        randstr = randstr.Substring(randstr.Length - digits, digits);
-
-                        if (randstr.Length == digits && randstr != null)
+                        if (randoms.Count < Convert.ToInt32(number_of_numbers.Text))
                         {
-                            randoms.Add(Convert.ToDouble(randstr));
-                            colordata.Items.Add(randstr);
-
-                            StreamWriter writer = new StreamWriter("C:\\Users\\Pi\\Desktop\\random.txt", true);
-                            writer.WriteLine(randstr);
-                            writer.Close();
+                            randoms_generated += 1;
+                            randoms.Add(randint);
+                            
                         }
 
-                        else { };
+
+                        for (int z = 0; z < Convert.ToInt32(number_of_numbers.Text); z++)
+                        {
+                            //Ensures that the program does not generate more numbers than needed
+                            if (randoms.Count < Convert.ToInt32(number_of_numbers.Text))
+                            {
+                                randint = random.Next();
+                                randoms.Add(randint);
+                                randoms_generated += 1;
+
+                            }
+                            else
+                            {
+                                break;
+                            }
+                      } 
 
                     }
 
@@ -253,10 +288,25 @@ namespace motiontracking
                 oldy = y;
             }
 
+            //Initialises file writer
+            string filepath = "C:\\Users\\Pi\\Desktop\\random.txt";
+            StreamWriter writer = new StreamWriter(filepath, true);
+
+            foreach (int randint in randoms)
+            {
+                string randintstr = Convert.ToString(randint);
+                randintstr = randintstr.Substring(randintstr.Length - Convert.ToInt32(digitsofentropy.Text) );
+                colordata.Items.Add(randintstr);
+                writer.WriteLine(randintstr);
+            }
+
+            writer.Close();
+
             frames = new List<Bitmap>();
             foreach (Bitmap frame in framesbackup)
             {
                 frames.Add(frame);
+
             }
         }
 
@@ -306,5 +356,19 @@ namespace motiontracking
                 frames.RemoveAt(frames.Count -1);
             }
         }
+
+        private void resolutionlist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            videoSource = new VideoCaptureDevice(videosources[webcams.SelectedIndex].MonikerString); 
+            videoSource.VideoResolution = videoSource.VideoCapabilities[resolutionlist.SelectedIndex];
+            stream.Size = new Size(videoSource.VideoResolution.FrameSize.Width, videoSource.VideoResolution.FrameSize.Height);
+        }
+
+        private void digitsofentropy_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
