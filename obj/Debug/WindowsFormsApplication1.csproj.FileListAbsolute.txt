@@ -1,0 +1,45 @@
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\AForge.Video.DirectShow.dll
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\AForge.Video.dll
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\AForge.dll
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\AForge.Video.xml
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\AForge.Video.DirectShow.xml
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\AForge.xml
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+c:\users\pi\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\AForge.Video.DirectShow.dll
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\AForge.Video.dll
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\AForge.dll
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\AForge.Video.xml
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\AForge.Video.DirectShow.xml
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\AForge.xml
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\Motion Tracking.exe.config
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\obj\Debug\MotionTracking.Properties.Resources.resources
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\Motion Tracking.exe
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\bin\Debug\Motion Tracking.pdb
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\obj\Debug\Motion Tracking.exe
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\obj\Debug\Motion Tracking.pdb
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\WindowsFormsApplication1\obj\Debug\motiontracking.MainWindow.resources
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\Motion Tracking.exe.config
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\obj\Debug\Motion Tracking.exe
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\obj\Debug\Motion Tracking.pdb
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\obj\Debug\motiontracking.MainWindow.resources
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\obj\Debug\MotionTracking.Properties.Resources.resources
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\Motion Tracking.exe
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\Motion Tracking.pdb
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\AForge.Video.DirectShow.dll
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\AForge.Video.dll
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\AForge.dll
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\AForge.Video.xml
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\AForge.Video.DirectShow.xml
+C:\Users\Pi\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Motion-Tracking-BASEF\motiontracking\bin\Debug\AForge.xml

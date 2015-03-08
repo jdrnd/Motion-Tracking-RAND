@@ -34,12 +34,12 @@
             this.start = new System.Windows.Forms.Button();
             this.stop = new System.Windows.Forms.Button();
             this.analyse = new System.Windows.Forms.Button();
-            this.colordata = new System.Windows.Forms.ListBox();
+            this.output_window = new System.Windows.Forms.ListBox();
             this.pixelpickerlabel = new System.Windows.Forms.Label();
-            this.calibratered = new System.Windows.Forms.Button();
+            this.calibrate = new System.Windows.Forms.Button();
             this.colorlabel = new System.Windows.Forms.Label();
             this.colordisplay = new System.Windows.Forms.Panel();
-            this.colorviewred = new System.Windows.Forms.Panel();
+            this.colorview = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.webcams = new System.Windows.Forms.ComboBox();
             this.webcamselect = new System.Windows.Forms.Label();
@@ -119,15 +119,15 @@
             this.analyse.TabIndex = 3;
             this.analyse.Text = "Analyse";
             this.analyse.UseVisualStyleBackColor = true;
-            this.analyse.Click += new System.EventHandler(this.button1_Click);
+            this.analyse.Click += new System.EventHandler(this.analyse_Click);
             // 
-            // colordata
+            // output_window
             // 
-            this.colordata.FormattingEnabled = true;
-            this.colordata.Location = new System.Drawing.Point(510, 12);
-            this.colordata.Name = "colordata";
-            this.colordata.Size = new System.Drawing.Size(104, 238);
-            this.colordata.TabIndex = 4;
+            this.output_window.FormattingEnabled = true;
+            this.output_window.Location = new System.Drawing.Point(510, 12);
+            this.output_window.Name = "output_window";
+            this.output_window.Size = new System.Drawing.Size(104, 238);
+            this.output_window.TabIndex = 4;
             // 
             // pixelpickerlabel
             // 
@@ -138,15 +138,15 @@
             this.pixelpickerlabel.TabIndex = 5;
             this.pixelpickerlabel.Text = "Click a pixel to get its color";
             // 
-            // calibratered
+            // calibrate
             // 
-            this.calibratered.Location = new System.Drawing.Point(630, 274);
-            this.calibratered.Name = "calibratered";
-            this.calibratered.Size = new System.Drawing.Size(94, 23);
-            this.calibratered.TabIndex = 6;
-            this.calibratered.Text = "Calibrate";
-            this.calibratered.UseVisualStyleBackColor = true;
-            this.calibratered.Click += new System.EventHandler(this.button1_Click_1);
+            this.calibrate.Location = new System.Drawing.Point(630, 274);
+            this.calibrate.Name = "calibrate";
+            this.calibrate.Size = new System.Drawing.Size(94, 23);
+            this.calibrate.TabIndex = 6;
+            this.calibrate.Text = "Calibrate";
+            this.calibrate.UseVisualStyleBackColor = true;
+            this.calibrate.Click += new System.EventHandler(this.calibrate_Click_1);
             // 
             // colorlabel
             // 
@@ -164,12 +164,12 @@
             this.colordisplay.Size = new System.Drawing.Size(56, 38);
             this.colordisplay.TabIndex = 10;
             // 
-            // colorviewred
+            // colorview
             // 
-            this.colorviewred.Location = new System.Drawing.Point(630, 303);
-            this.colorviewred.Name = "colorviewred";
-            this.colorviewred.Size = new System.Drawing.Size(18, 15);
-            this.colorviewred.TabIndex = 11;
+            this.colorview.Location = new System.Drawing.Point(630, 303);
+            this.colorview.Name = "colorview";
+            this.colorview.Size = new System.Drawing.Size(18, 15);
+            this.colorview.TabIndex = 11;
             // 
             // label1
             // 
@@ -287,7 +287,6 @@
             this.digitsofentropy.Size = new System.Drawing.Size(28, 20);
             this.digitsofentropy.TabIndex = 29;
             this.digitsofentropy.Text = "5";
-            this.digitsofentropy.TextChanged += new System.EventHandler(this.digitsofentropy_TextChanged);
             // 
             // visuallytrack
             // 
@@ -339,12 +338,12 @@
             this.Controls.Add(this.webcamselect);
             this.Controls.Add(this.webcams);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.colorviewred);
+            this.Controls.Add(this.colorview);
             this.Controls.Add(this.colordisplay);
             this.Controls.Add(this.colorlabel);
-            this.Controls.Add(this.calibratered);
+            this.Controls.Add(this.calibrate);
             this.Controls.Add(this.pixelpickerlabel);
-            this.Controls.Add(this.colordata);
+            this.Controls.Add(this.output_window);
             this.Controls.Add(this.analyse);
             this.Controls.Add(this.stop);
             this.Controls.Add(this.start);
@@ -364,12 +363,12 @@
         private System.Windows.Forms.Button start;
         private System.Windows.Forms.Button stop;
         private System.Windows.Forms.Button analyse;
-        private System.Windows.Forms.ListBox colordata;
+        private System.Windows.Forms.ListBox output_window;
         private System.Windows.Forms.Label pixelpickerlabel;
-        private System.Windows.Forms.Button calibratered;
+        private System.Windows.Forms.Button calibrate;
         private System.Windows.Forms.Label colorlabel;
         private System.Windows.Forms.Panel colordisplay;
-        private System.Windows.Forms.Panel colorviewred;
+        private System.Windows.Forms.Panel colorview;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox webcams;
         private System.Windows.Forms.Label webcamselect;
