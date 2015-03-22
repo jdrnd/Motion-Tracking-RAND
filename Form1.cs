@@ -10,6 +10,9 @@ See the GNU General Public License for more details.
 
 Please view the included "GNUGPLv3" file for full licencing terms.*/
 
+//All Project Code is available at https://github.com/underdiver/Motion-Tracking-BASEF/
+
+
 //Imports standard system libraries
 using System;
 using System.Collections.Generic;
